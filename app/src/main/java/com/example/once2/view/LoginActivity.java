@@ -1,8 +1,7 @@
-package com.example.once2.View;
+package com.example.once2.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +11,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.once2.Presenter.LoginPresenter;
 import com.example.once2.R;
+import com.example.once2.presenter.LoginPresenter;
+import com.example.once2.view.ui.HomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity implements ILoginActivity {
+public class LoginActivity extends AppCompatActivity implements IMLoginActivity {
     private EditText mEditText1;
     private EditText mEditText2;
     private TextInputLayout mTextInputLayout1;
@@ -28,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
     private TextView mTextView3;
     private CheckBox mCheckBox;
     private Button mButton;
-    private ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;//进度条
     private LoginPresenter loginPresenter;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -56,12 +55,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
                 }
             }
         });
+       loginPresenter.keepPassword();//记住密码
     }
     private void initView() {
         //初始化UI组件
         mTextView1=findViewById(R.id.tv_login_title);
         mTextView2=findViewById(R.id.tv_login);
-        mTextView3=findViewById(R.id.tv_login_forgetpassword);
         mEditText1 = findViewById(R.id.et_login_username1);
         mEditText2 = findViewById(R.id.et_login_password1);
         mTextInputLayout1=findViewById(R.id.et_login_username);
@@ -79,11 +78,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
     @Override
     public void showLoginSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        SharedPreferences sharedPreferences = getSharedPreferences("my_preference", MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();//创建了一个文件，即通用，在login处理，必要的在那创建
-        edit.putString("password",mEditText2.getText().toString());
-        edit.putString("username",mEditText1.getText().toString());
-        edit.apply();
+      loginPresenter.getKeepPassword(mEditText1.getText().toString(),mEditText2.getText().toString());
     }
     @Override
     public void showLoginError(String msg) {
@@ -99,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
     }
     @Override
     public void startHomeActivity() {
-        Toast.makeText(this,"跳转成功",Toast.LENGTH_SHORT).show();
         HomeActivity homeActivity=new HomeActivity();
         homeActivity.startActivity(this);
     }
@@ -107,7 +101,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivity {
     public Context MYgetCOntext() {
         return this;
     }
-
     @Override
     public void keepPassword(String username,String password) {
     mEditText1.setText(username);

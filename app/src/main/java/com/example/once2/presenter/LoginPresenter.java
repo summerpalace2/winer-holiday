@@ -1,22 +1,20 @@
-package com.example.once2.Presenter;
+package com.example.once2.presenter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import androidx.annotation.NonNull;
 
-import com.example.once2.Model.Json.LoginJson;
-import com.example.once2.Model.LoginModel;
-import com.example.once2.View.ILoginActivity;
-public class LoginPresenter implements LoginPresenter1
+import com.example.once2.model.json.LoginJson;
+import com.example.once2.model.LoginModel;
+import com.example.once2.view.IMLoginActivity;
+public class LoginPresenter implements IMLoginPresenter
 {
-    private ILoginActivity loginView;
+    private IMLoginActivity loginView;
     private LoginModel loginModel;
     private String username;
     private String password;
     private MyHandler handler=new MyHandler();
-    public LoginPresenter(ILoginActivity view) {
+    public LoginPresenter(IMLoginActivity view) {
         this.loginView = view;
         this.loginModel = new LoginModel(loginView.MYgetCOntext()); // 可以通过依赖注入解耦
     }
@@ -42,6 +40,12 @@ public class LoginPresenter implements LoginPresenter1
     public void keepPassword() {
       loginView.keepPassword(loginModel.keepUsername(),loginModel.keepPassword());
     }
+
+    @Override
+    public void getKeepPassword(String username, String password) {
+        loginModel.updateKeepPassword(username,password);
+    }
+
     public class MyHandler extends Handler {
    @Override
     public void handleMessage(@NonNull Message msg) {

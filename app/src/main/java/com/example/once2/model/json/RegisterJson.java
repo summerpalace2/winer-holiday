@@ -1,4 +1,4 @@
-package com.example.once2.Model.Json;
+package com.example.once2.model.json;
 
 /**
  * description ： TODO:类的作用

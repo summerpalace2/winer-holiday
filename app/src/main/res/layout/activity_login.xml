@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.LoginActivity"
+    tools:context=".view.LoginActivity"
     android:background="@mipmap/loginbackground">
 <TextView
     android:id="@+id/tv_login_title"
@@ -13,16 +13,18 @@
     android:layout_height="wrap_content"
     android:text="生活助手"
     android:textColor="#FF9F4F09"
-    android:textSize="25dp"
+    android:textSize="28dp"
     app:layout_constraintBottom_toTopOf="@id/et_login_username"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"/>
 <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/et_login_username"
     android:layout_width="300dp"
-    android:layout_height="60dp"
+    android:layout_height="95dp"
     android:textColor="#FF9F4F09"
     android:text="账号"
+    app:counterEnabled="true"
+    app:counterMaxLength="20"
     app:layout_constraintStart_toStartOf="parent"
     android:layout_marginTop="260dp"
     app:layout_constraintEnd_toEndOf="parent"
@@ -34,40 +36,46 @@
     android:id="@+id/et_login_username1"
     android:hint="账号"
     android:textColor="#FF9F4F09"
+    android:layout_marginTop="30dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 </com.google.android.material.textfield.TextInputLayout>
-<com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/et_login_password"
-    android:layout_width="300dp"
-    android:layout_height="60dp"
-    android:textColor="#FF9F4F09"
-    app:errorTextAppearance="@style/error"
-    app:errorEnabled="true"
-    app:counterMaxLength="15"
-    app:endIconMode="password_toggle"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/et_login_username">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_login_password1"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="4dp"
-        android:drawablePadding="15dp"
-        android:hint="密码"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_login_password"
+        android:layout_width="300dp"
+        android:layout_height="95dp"
         android:textColor="#FF9F4F09"
-        app:layout_constraintStart_toStartOf="@id/et_login_username"
-        app:layout_constraintTop_toBottomOf="@id/et_login_username" />
-</com.google.android.material.textfield.TextInputLayout>
-<android.widget.Button
+        app:endIconMode="password_toggle"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorTextAppearance="@style/error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_login_username">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_login_password1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="15dp"
+            android:hint="密码"
+            android:textColor="#FF9F4F09"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="@id/et_login_username"
+            app:layout_constraintTop_toBottomOf="@id/et_login_username" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <android.widget.Button
     android:id="@+id/button1"
     android:layout_width="152dp"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_button"
     android:text="登录"
+    android:layout_marginTop="30dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
@@ -80,24 +88,14 @@
     android:textColor="#FF9F4F09"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_login_forgetpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="忘记密码？"
-        android:textColor="#FF9F4F09"
-        app:layout_constraintLeft_toLeftOf="@id/et_login_password"
-        app:layout_constraintEnd_toStartOf="@+id/button1"
-        app:layout_constraintTop_toBottomOf="@id/et_login_password"/>
-
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_marginBottom="30dp"/>
     <CheckBox
     android:id="@+id/ch_login_keeppassword"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="记住密码"
+    android:checked="true"
     android:textColor="#FF9F4F09"
     app:layout_constraintLeft_toRightOf="@id/button1"
     app:layout_constraintTop_toTopOf="@id/button1"/>

@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.RegisterActivity"
-    android:background="@mipmap/loginbackground">
+    tools:context=".view.RegisterActivity"
+    android:background="@mipmap/register">
 <TextView
     android:id="@+id/tv_reg_tips"
     android:layout_width="wrap_content"

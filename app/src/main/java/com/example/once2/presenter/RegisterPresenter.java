@@ -1,13 +1,13 @@
-package com.example.once2.Presenter;
+package com.example.once2.presenter;
 
 import android.os.Handler;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
-import com.example.once2.Model.Json.RegisterJson;
-import com.example.once2.Model.RegisterModel;
-import com.example.once2.View.RegisterActivity;
-import com.example.once2.View.IRegisterActivity;
+import com.example.once2.model.json.RegisterJson;
+import com.example.once2.model.RegisterModel;
+import com.example.once2.view.RegisterActivity;
+import com.example.once2.view.IRegisterActivity;
 
 /**
  * description ： TODO:类的作用
@@ -15,7 +15,7 @@ import com.example.once2.View.IRegisterActivity;
  * email : 2992203079qq.com
  * date : 2025/1/20 19:19
  */
-public class RegisterPresenter implements RegisterPresenter1{
+public class RegisterPresenter implements IMRegisterPresenter {
     private IRegisterActivity registerView;
     private RegisterModel registerModel;
     private String username;

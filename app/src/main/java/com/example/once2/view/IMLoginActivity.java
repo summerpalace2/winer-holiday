@@ -1,8 +1,8 @@
-package com.example.once2.View;
+package com.example.once2.view;
 
 import android.content.Context;
 
-public interface ILoginActivity {
+public interface IMLoginActivity {
     void startRegisterActivity();//打开RegisterActivity活动
     void showLoginSuccess();//展示成功信息
     void showLoginError(String msg);//展示错误信息

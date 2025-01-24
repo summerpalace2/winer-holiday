@@ -1,4 +1,4 @@
-package com.example.once2.View;
+package com.example.once2.view;
 
 import android.content.Context;
 
@@ -8,6 +8,6 @@ import android.content.Context;
  * email : 2992203079qq.com
  * date : 2025/1/20 17:55
  */
-public interface IHomeActivity {
-    public  void startActivity(Context content) ;
+public interface IMHomeActivity {
+    public  void startActivity(Context content) ;//启动活动
 }

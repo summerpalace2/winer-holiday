@@ -1,4 +1,4 @@
-package com.example.once2.Model.Json;
+package com.example.once2.model.json;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
