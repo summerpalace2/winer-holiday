@@ -1,4 +1,4 @@
-package com.example.once2.presenter;
+package com.example.once2.Presenter;
 
 import android.os.Handler;
 import android.os.Message;
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.once2.model.json.LoginJson;
 import com.example.once2.model.LoginModel;
-import com.example.once2.view.IMLoginActivity;
+import com.example.once2.View.IMLoginActivity;
 public class LoginPresenter implements IMLoginPresenter
 {
     private IMLoginActivity loginView;
@@ -44,6 +44,21 @@ public class LoginPresenter implements IMLoginPresenter
     @Override
     public void getKeepPassword(String username, String password) {
         loginModel.updateKeepPassword(username,password);
+    }
+
+    @Override
+    public void concelKeepPassword() {
+        loginModel.concelKeepPassword();
+    }
+
+    @Override
+    public String returnSelect() {
+        return loginModel.getSelect();
+    }
+
+    @Override
+    public void containKeepPassword() {
+        loginModel.containkeepPassword();
     }
 
     public class MyHandler extends Handler {

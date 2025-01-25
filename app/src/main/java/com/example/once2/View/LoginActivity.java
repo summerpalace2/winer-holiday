@@ -1,4 +1,4 @@
-package com.example.once2.view;
+package com.example.once2.View;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.once2.R;
-import com.example.once2.presenter.LoginPresenter;
-import com.example.once2.view.ui.HomeActivity;
+import com.example.once2.Presenter.LoginPresenter;
+import com.example.once2.View.ui.HomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity implements IMLoginActivity {
@@ -51,12 +51,25 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    loginPresenter.keepPassword();
+                    loginPresenter.keepPassword();//记住密码
+                    loginPresenter.containKeepPassword();
+                }
+                if (!isChecked) {
+                    loginPresenter.concelKeepPassword();
                 }
             }
         });
-       loginPresenter.keepPassword();//记住密码
+        judge();//判段之前用户是否勾选checkbox
     }
+
+    private void judge() {
+
+        if(loginPresenter.returnSelect().equals("true")){
+            mCheckBox.setChecked(true);//勾选checkbox
+            loginPresenter.keepPassword();//记住密码
+        }
+    }
+
     private void initView() {
         //初始化UI组件
         mTextView1=findViewById(R.id.tv_login_title);

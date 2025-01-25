@@ -1,4 +1,4 @@
-package com.example.once2.presenter;
+package com.example.once2.Presenter;
 
 import android.os.Handler;
 import android.os.Message;
@@ -6,8 +6,8 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 import com.example.once2.model.json.RegisterJson;
 import com.example.once2.model.RegisterModel;
-import com.example.once2.view.RegisterActivity;
-import com.example.once2.view.IRegisterActivity;
+import com.example.once2.View.RegisterActivity;
+import com.example.once2.View.IRegisterActivity;
 
 /**
  * description ： TODO:类的作用

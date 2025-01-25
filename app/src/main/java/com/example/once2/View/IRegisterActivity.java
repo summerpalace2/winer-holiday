@@ -1,4 +1,4 @@
-package com.example.once2.view;
+package com.example.once2.View;
 
 import android.content.Context;
 

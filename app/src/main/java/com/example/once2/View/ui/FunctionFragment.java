@@ -1,4 +1,4 @@
-package com.example.once2.view.ui;
+package com.example.once2.View.ui;
 
 import android.os.Bundle;
 

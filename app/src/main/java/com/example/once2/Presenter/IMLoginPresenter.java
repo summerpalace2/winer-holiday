@@ -1,4 +1,4 @@
-package com.example.once2.presenter;
+package com.example.once2.Presenter;
 
 import com.example.once2.model.json.LoginJson;
 /**
@@ -12,4 +12,7 @@ public interface IMLoginPresenter {
     public void getData(String username,String password);//传递数据给Presenter
     public void keepPassword();//获取从model层储存的数据
     public void getKeepPassword(String username,String password);//获取从View层返回的登陆成功的数据，以更新最新的保存密码;
+    public void concelKeepPassword();//如果用户取消了记住密码，那么就改变shareferenc储存的值
+    public String returnSelect();
+    public void containKeepPassword();//保存密码确认
 }

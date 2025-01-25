@@ -1,4 +1,4 @@
-package com.example.once2.view.ui;
+package com.example.once2.View.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.once2.R;
 import com.example.once2.adapter.FragmentAdapter;
 import com.example.once2.adapter.FragmentInterface;
-import com.example.once2.view.IMHomeActivity;
+import com.example.once2.View.IMHomeActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

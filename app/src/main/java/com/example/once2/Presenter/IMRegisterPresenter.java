@@ -1,4 +1,4 @@
-package com.example.once2.presenter;
+package com.example.once2.Presenter;
 
 import com.example.once2.model.json.RegisterJson;
 

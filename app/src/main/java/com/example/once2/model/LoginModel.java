@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.example.once2.model.json.LoginJson;
 import com.example.once2.model.json.Network;
-import com.example.once2.presenter.IMLoginPresenter;
+import com.example.once2.Presenter.IMLoginPresenter;
 import com.google.gson.Gson;
 import java.util.HashMap;
 public class LoginModel implements IMLoginModel {
@@ -41,11 +41,29 @@ public class LoginModel implements IMLoginModel {
     @Override
     public void updateKeepPassword(String username, String password) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();//创建了一个文件，即通用，在login处理，注意shareferences只认名字不认context
+        SharedPreferences.Editor edit = sharedPreferences.edit();//
         edit.putString("password",password);//保存登录成功的账号，保存最近一次使用的密码
         edit.putString("username",username);
         edit.apply();//提交，这样不阻碍主线程
-
+    }
+    @Override
+    public void concelKeepPassword() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();//
+        edit.putString("select","false");//改变select对应的值
+        edit.apply();//提交，这样不阻碍主线程
+    }
+    @Override
+    public void containkeepPassword() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();//
+        edit.putString("select","true");//改变select对应的值
+        edit.apply();//提交，这样不阻碍主线程
+    }
+    @Override
+    public String getSelect() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
+        return sharedPreferences.getString("select"," ");
     }
 }
 

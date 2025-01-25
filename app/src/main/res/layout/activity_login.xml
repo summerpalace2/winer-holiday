@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity"
+    tools:context=".View.LoginActivity"
     android:background="@mipmap/loginbackground">
 <TextView
     android:id="@+id/tv_login_title"
@@ -95,7 +95,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="记住密码"
-    android:checked="true"
     android:textColor="#FF9F4F09"
     app:layout_constraintLeft_toRightOf="@id/button1"
     app:layout_constraintTop_toTopOf="@id/button1"/>

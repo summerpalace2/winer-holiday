@@ -1,4 +1,4 @@
-package com.example.once2.view;
+package com.example.once2.View;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.once2.presenter.RegisterPresenter;
+import com.example.once2.Presenter.RegisterPresenter;
 import com.example.once2.R;
 import com.google.android.material.textfield.TextInputLayout;
 public class RegisterActivity extends AppCompatActivity implements IRegisterActivity {
