@@ -2,13 +2,11 @@ package com.example.once2.Presenter;
 
 import android.os.Handler;
 import android.os.Message;
-
 import androidx.annotation.NonNull;
-import com.example.once2.model.json.RegisterJson;
+import com.example.once2.model.Json.RegisterJson;
 import com.example.once2.model.RegisterModel;
 import com.example.once2.View.RegisterActivity;
-import com.example.once2.View.IRegisterActivity;
-
+import com.example.once2.View.IMRegisterActivity;
 /**
  * description ： TODO:类的作用
  * author : summer_palace2
@@ -16,7 +14,7 @@ import com.example.once2.View.IRegisterActivity;
  * date : 2025/1/20 19:19
  */
 public class RegisterPresenter implements IMRegisterPresenter {
-    private IRegisterActivity registerView;
+    private IMRegisterActivity registerView;
     private RegisterModel registerModel;
     private String username;
     private String password;

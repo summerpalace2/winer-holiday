@@ -2,12 +2,16 @@ package com.example.once2.View.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.fragment.app.Fragment;
 import com.example.once2.R;
@@ -20,12 +24,15 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
+    private ViewPager2 viewPager2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preference", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         TabLayout tabLayout = findViewById(R.id.tablayout);
-        ViewPager2 vp2=findViewById(R.id.tab_viewpager);
+        viewPager2 = findViewById(R.id.tab_viewpager);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ArrayList<FragmentInterface> fragmentList = new ArrayList<>();
         fragmentList.add(new FragmentInterface() {
             @Override
@@ -48,22 +55,18 @@ public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.homepage));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tool));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.personal));
-        FragmentAdapter adapter=new FragmentAdapter(this,fragmentList);
-        vp2.setAdapter(adapter);
-        new TabLayoutMediator(tabLayout, vp2, new TabLayoutMediator.TabConfigurationStrategy()
-        {
+        FragmentAdapter adapter = new FragmentAdapter(this, fragmentList);
+        viewPager2.setAdapter(adapter);
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position)
-            {
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
                     tab.setText("主页");
                     tab.setIcon(R.drawable.homepage);
-                }
-                else if (position==1) {
-                    tab.setText("功能");
+                } else if (position == 1) {
+                    tab.setText("新闻中心");
                     tab.setIcon(R.drawable.tool);
-                }
-                else {
+                } else {
                     tab.setText("个人中心");
                     tab.setIcon(R.drawable.personal);
                 }
@@ -71,19 +74,9 @@ public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
 
         }).attach();
 
-hideToolTipText(tabLayout.newTab());
     }
-    private void hideToolTipText(TabLayout.Tab tab) {
-        // 取消长按事件
-        View tabView = tab.view;
-        tabView.setLongClickable(false);
 
-        // API 26 以上设置空文本
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            tabView.setTooltipText("");
-        }
-    }
-    @Override
+
     public void startActivity(Context content) {
         //启动活动
         Intent intent = new Intent(content, HomeActivity.class);

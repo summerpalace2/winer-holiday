@@ -2,9 +2,11 @@ package com.example.once2.Presenter;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
-import com.example.once2.model.json.LoginJson;
+import com.example.once2.model.Json.LoginJson;
 import com.example.once2.model.LoginModel;
 import com.example.once2.View.IMLoginActivity;
 public class LoginPresenter implements IMLoginPresenter
@@ -62,14 +64,15 @@ public class LoginPresenter implements IMLoginPresenter
     }
 
     public class MyHandler extends Handler {
-   @Override
-    public void handleMessage(@NonNull Message msg) {
-     super.handleMessage(msg);
-     String data = (String) msg.obj;
-     if(msg.what==2) {
-       loginModel.doGson(data,LoginPresenter.this);
-      }
-     }
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            String data = (String) msg.obj;
+            Log.d("logindata","主线程收到消息"+data);
+            if(msg.what==2) {
+                loginModel.doGson(data,LoginPresenter.this);
+            }
+        }
     }
 }
 

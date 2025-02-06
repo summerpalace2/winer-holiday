@@ -1,45 +1,28 @@
-package com.example.once2.model.json;
-
-/**
- * description ： TODO:类的作用
- * author : summer_palace2
- * email : 2992203079qq.com
- * date : 2025/1/21 16:17
- */
-
-//全新的网络请求工具类，由于MVP架构的原因handler被放在Presenter中所以调用网络请求方法时数据要传到Presenter,但是数据处理应该在Model层，所以要调用一次接口来实现通信，但如果在申请网络请求时就处理接受的数据就不需要这个过程，因此Network2来了
-
+package com.example.once2.model.Json;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.zip.GZIPInputStream;
+
 //网络请求过程
 //server(网络)->HttpURLConnection->获取输入流inputStream(二进制)->inputStreamReader(加工包装)->BufferedReader(数据储存池)->StringBuilder(一点点读取数据)—>给接收者即handler->在Gson解析Json数据并传到实体类->绑定数据
 //get请求
 // 1 http://+ 2 www....+ 3 /free/day+?+ 4 city_id=1010&...{最后没有&这是为什么要“减一”的原因}
 //   1 scheme 2 host(域名):端口 3 path(路径) 4 query(条件)
 //post 1+2+3+加键值对
-public class Network2 {
+public class Network {
 
-    public static LoginJson doGson(String responseData)
-    {
-        LoginJson loginJson = new LoginJson();
-        loginJson = new Gson().fromJson(responseData, LoginJson.class);
-        return loginJson;
-    }
-    public static String StreamToString(InputStream in)
-    {
+    public static String StreamToString(InputStream in)  {
         StringBuilder sb = new StringBuilder();
         String Line;
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -49,7 +32,7 @@ public class Network2 {
                 sb.append('\n');
 
             }
-            if(sb.length()==0) {
+           if(sb.length()==0) {
                 return null;
             }
         } catch (Exception e) {
@@ -81,6 +64,7 @@ public class Network2 {
                 connection.setDoOutput(true);
                 //优先接受中文zh-CN
                 connection.setRequestProperty("Accept-Encoding", "gzip,deflate");
+                connection.setRequestProperty("Accept-Language", "zh-CN,zh;q=0.9");
                 StringBuilder dataToWrite = new StringBuilder();
                 for (String key : params.keySet())
                 {
@@ -95,12 +79,15 @@ public class Network2 {
                 outputStream.write(dataToWrite.substring(0, dataToWrite.length() - 1).getBytes());
                 //substring(0, dataToWrite.length() - 1)去最后的&
                 InputStream in = connection.getInputStream();//从接⼝处获取
+                if ("gzip".equals(connection.getContentEncoding())) {
+                    in = new GZIPInputStream(in);
+                }
                 String responseData = StreamToString(in);//这⾥就是服务器返回的数据
                 Message message = new Message();
                 message.what = 2;
-                message.obj = doGson(responseData);
+                message.obj = responseData;
                 handler.sendMessage(message);
-                Log.d("Get", "sendGetNetRequest: " + responseData);
+                Log.d("Post1", "sendPostNetRequest: " + responseData);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -108,14 +95,14 @@ public class Network2 {
         }).start();
 
     }
-    //无参Get请求
+//无参Get请求
     public static void sendGetRequest(String mUrl1,Handler handler)
     {
         //lambda表达式，相当于其中new Runnable 并且重写⽅法
         new Thread(() -> {
 
             try {
-                Looper.prepare();
+
                 URL url = new URL(mUrl1);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("Get");//设置请求⽅式为Get
@@ -128,13 +115,13 @@ public class Network2 {
                 String responseData = StreamToString(in);//这⾥就是服务器返回的数据
                 Message message = new Message();
                 message.what = 1;
-                message.obj = doGson(responseData);
+                message.obj = responseData;
                 handler.sendMessage(message);
-                Log.d("Post", "sendGetNetRequest: " + responseData);
+                Log.d("Get111", "sendGetNetRequest: " + responseData);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Looper.loop();
+
         }).start();
 
     }

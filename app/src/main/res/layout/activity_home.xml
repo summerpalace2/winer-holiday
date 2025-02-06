@@ -5,12 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".View.ui.HomeActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tab_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="670dp"
+        android:layout_height="687dp"
         app:layout_constraintBottom_toTopOf="@id/tablayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -21,5 +22,6 @@
         app:tabMode="fixed"
         app:tabIndicatorHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

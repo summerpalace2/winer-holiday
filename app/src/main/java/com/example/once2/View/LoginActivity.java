@@ -2,8 +2,11 @@ package com.example.once2.View;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -29,7 +32,6 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
     private Button mButton;
     private ProgressBar mProgressBar;//进度条
     private LoginPresenter loginPresenter;
-    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,14 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
         loginPresenter = new LoginPresenter(this);
         initView();
         initEvent();
+        // 设置状态栏透明
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(android.graphics.Color.TRANSPARENT);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
     }
     private void initEvent() {
         // 设置按钮点击事件
@@ -51,7 +61,6 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    loginPresenter.keepPassword();//记住密码
                     loginPresenter.containKeepPassword();
                 }
                 if (!isChecked) {
@@ -59,17 +68,15 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
                 }
             }
         });
-        judge();//判段之前用户是否勾选checkbox
+        judgeCheckbox();//判段之前用户是否勾选checkbox
     }
-
-    private void judge() {
+    private void judgeCheckbox() {
 
         if(loginPresenter.returnSelect().equals("true")){
             mCheckBox.setChecked(true);//勾选checkbox
             loginPresenter.keepPassword();//记住密码
         }
     }
-
     private void initView() {
         //初始化UI组件
         mTextView1=findViewById(R.id.tv_login_title);

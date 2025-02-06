@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
-import com.example.once2.model.json.LoginJson;
-import com.example.once2.model.json.Network;
+import com.example.once2.model.Json.LoginJson;
+import com.example.once2.model.Json.Network;
 import com.example.once2.Presenter.IMLoginPresenter;
 import com.google.gson.Gson;
 import java.util.HashMap;

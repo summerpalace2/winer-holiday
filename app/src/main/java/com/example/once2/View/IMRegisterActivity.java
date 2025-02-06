@@ -2,7 +2,7 @@ package com.example.once2.View;
 
 import android.content.Context;
 
-public interface IRegisterActivity {
+public interface IMRegisterActivity {
     void onError(String MSg);//errorMsg传入错误信息
     void onSuccess();//展示成功信息
     String getUsername();//获取用户名

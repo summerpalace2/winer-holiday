@@ -1,6 +1,6 @@
 package com.example.once2.Presenter;
 
-import com.example.once2.model.json.RegisterJson;
+import com.example.once2.model.Json.RegisterJson;
 
 /**
  * description ： TODO:类的作用
