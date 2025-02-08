@@ -8,7 +8,6 @@ import com.example.once2.Presenter.ui.HomePageContact;
 import com.example.once2.model.Json.CloudJson;
 import com.example.once2.model.Json.JokeJson;
 import com.example.once2.model.Json.Network;
-import com.example.once2.model.Json.Network2;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;

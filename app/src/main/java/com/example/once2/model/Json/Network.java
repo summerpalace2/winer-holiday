@@ -87,7 +87,7 @@ public class Network {
                 message.what = 2;
                 message.obj = responseData;
                 handler.sendMessage(message);
-                Log.d("Post1", "sendPostNetRequest: " + responseData);
+                Log.d("Post111", "sendPostNetRequest: " + responseData);
             } catch (Exception e) {
                 e.printStackTrace();
             }

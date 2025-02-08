@@ -51,6 +51,7 @@ public class HomePageFragment extends Fragment implements HomePageContact.View {
     private TextView mTextView3;
     private TextView mTextView4;
     private TextView mTextView5;
+    private TextView mTextView6;
     private EditText mEditText;
     private Button mButton;
     private ImageButton mImageButton;
@@ -129,6 +130,7 @@ public class HomePageFragment extends Fragment implements HomePageContact.View {
         mTextView3=view.findViewById(R.id.tv_temperature);
         mTextView4=view.findViewById(R.id.tv_weather);
         mTextView5=view.findViewById(R.id.tv_temperatures);
+        mTextView6=view.findViewById(R.id.tv_time);
         mEditText=view.findViewById(R.id.ed_region);
         mButton=view.findViewById(R.id.button);
         mImageButton=view.findViewById(R.id.ib_cloud);
@@ -153,24 +155,35 @@ public class HomePageFragment extends Fragment implements HomePageContact.View {
             case "lei": result=R.drawable.lei; break;
             case "shachen": result=R.drawable.shachen; break;
             case "xue": result=R.drawable.xue; break;
+            case "duoyun": result=R.drawable.duoyun;break;
+            case "zhongyu": result=R.drawable.zhongyu;break;
         }
         return result;
     }
-
     @Override
     public void returnDataPostJoke(JokeJson jokeJson) {
-        mTextView1.setText("每日笑话:"+jokeJson.getData().getContent());
+        if (jokeJson.getData()!=null) {
+            mTextView1.setText("每日笑话:" + jokeJson.getData().getContent());
+        }
+        else {
+            mTextView1.setText(jokeJson.getMessage());
+        }
     }
-
     @Override
     public void retrunDataPostCloud(CloudJson cloudJson) {
-        mTextView2.setText(cloudJson.getData().getCity());
-        mTextView3.setText(cloudJson.getData().getTemp()+"℃");
-        mTextView4.setText(cloudJson.getData().getWeather());
-        mTextView5.setText(cloudJson.getData().getMin_temp()+"~"+cloudJson.getData().getMax_temp()+"℃");
-        mImageView.setImageResource(getImgResOfWeather(cloudJson.getData().getWeather_code()));
-    }
+        if (cloudJson.getData()!=null) {
+            mTextView2.setText(cloudJson.getData().getCity());
+            mTextView3.setText(cloudJson.getData().getTemp() + "℃");
+            mTextView4.setText(cloudJson.getData().getWeather());
+            mTextView5.setText(cloudJson.getData().getMin_temp() + "~" + cloudJson.getData().getMax_temp() + "℃");
+            mTextView6.setText("日出"+cloudJson.getData().getSunrise()+"~"+"日落"+cloudJson.getData().getSunset());
+            mImageView.setImageResource(getImgResOfWeather(cloudJson.getData().getWeather_code()));
+        }
+       else {
+           mTextView1.setText("今日次数已经用完，剩下的是假信息");
+        }
 
+    }
     @Override
     public Context MYgetCOntext() {
         return getActivity();

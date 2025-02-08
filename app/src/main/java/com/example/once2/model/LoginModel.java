@@ -31,12 +31,12 @@ public class LoginModel implements IMLoginModel {
     @Override
     public String keepPassword() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
-       return sharedPreferences.getString("password"," ");
+       return sharedPreferences.getString("password","");
     }
     @Override
     public String keepUsername() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
-        return sharedPreferences.getString("username"," ");
+        return sharedPreferences.getString("username","");
     }
     @Override
     public void updateKeepPassword(String username, String password) {

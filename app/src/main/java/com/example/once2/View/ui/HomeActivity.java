@@ -25,12 +25,12 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
     private ViewPager2 viewPager2;
+    private TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = getSharedPreferences("my_preference", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        TabLayout tabLayout = findViewById(R.id.tablayout);
+        tabLayout = findViewById(R.id.tablayout);
         viewPager2 = findViewById(R.id.tab_viewpager);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ArrayList<FragmentInterface> fragmentList = new ArrayList<>();
@@ -46,15 +46,8 @@ public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
                 return new FunctionFragment();
             }
         });
-        fragmentList.add(new FragmentInterface() {
-            @Override
-            public Fragment back() {
-                return new PersonalFragment();
-            }
-        });
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.homepage));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tool));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.personal));
         FragmentAdapter adapter = new FragmentAdapter(this, fragmentList);
         viewPager2.setAdapter(adapter);
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -66,17 +59,13 @@ public class HomeActivity extends AppCompatActivity implements IMHomeActivity {
                 } else if (position == 1) {
                     tab.setText("新闻中心");
                     tab.setIcon(R.drawable.tool);
-                } else {
-                    tab.setText("个人中心");
-                    tab.setIcon(R.drawable.personal);
                 }
+
             }
 
         }).attach();
 
     }
-
-
     public void startActivity(Context content) {
         //启动活动
         Intent intent = new Intent(content, HomeActivity.class);

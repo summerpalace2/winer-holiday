@@ -8,11 +8,15 @@ package com.example.once2.model.Json;
  */
 public class JokeJson {
     private DataDTO data;
+    private String message;
     public DataDTO getData() {
         return data;
     }
     public void setData(DataDTO data) {
         this.data = data;
+    }
+    public String getMessage(){
+        return message;
     }
     public static class DataDTO {
         private String content;
