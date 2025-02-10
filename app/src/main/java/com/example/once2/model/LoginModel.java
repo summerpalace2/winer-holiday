@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
+import com.example.once2.Presenter.LoginContact;
 import com.example.once2.model.Json.LoginJson;
 import com.example.once2.model.Json.Network;
-import com.example.once2.Presenter.IMLoginPresenter;
 import com.google.gson.Gson;
 import java.util.HashMap;
-public class LoginModel implements IMLoginModel {
+public class LoginModel implements LoginContact.Model {
     private String mUrl = "https://www.wanandroid.com/user/login";
     private Context context;
     public LoginModel(Context context) {
         this.context=context;
     }
     @Override
-    public void doGson(String data, IMLoginPresenter callback) {
+    public void doGson(String data, LoginContact.Presenter callback) {
         LoginJson loginJson = new LoginJson();
         loginJson = new Gson().fromJson(data, LoginJson.class);
         callback.returnData(loginJson);
@@ -47,17 +47,10 @@ public class LoginModel implements IMLoginModel {
         edit.apply();//提交，这样不阻碍主线程
     }
     @Override
-    public void concelKeepPassword() {
+    public void containkeepPassword(String select) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();//
-        edit.putString("select","false");//改变select对应的值
-        edit.apply();//提交，这样不阻碍主线程
-    }
-    @Override
-    public void containkeepPassword() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("my_preference", context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();//
-        edit.putString("select","true");//改变select对应的值
+        edit.putString("select",select);//改变select对应的值
         edit.apply();//提交，这样不阻碍主线程
     }
     @Override

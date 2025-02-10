@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.once2.Presenter.RegisterContact;
 import com.example.once2.Presenter.RegisterPresenter;
 import com.example.once2.R;
 import com.google.android.material.textfield.TextInputLayout;
-public class RegisterActivity extends AppCompatActivity implements IMRegisterActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterContact.View {
     private Button mBtnLogin;
     private EditText mEtUserName;
     private EditText mEtpassword1;

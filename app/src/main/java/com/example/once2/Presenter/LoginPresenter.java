@@ -8,15 +8,15 @@ import androidx.annotation.NonNull;
 
 import com.example.once2.model.Json.LoginJson;
 import com.example.once2.model.LoginModel;
-import com.example.once2.View.IMLoginActivity;
-public class LoginPresenter implements IMLoginPresenter
+
+public class LoginPresenter implements LoginContact.Presenter
 {
-    private IMLoginActivity loginView;
+    private LoginContact.View loginView;
     private LoginModel loginModel;
     private String username;
     private String password;
     private MyHandler handler=new MyHandler();
-    public LoginPresenter(IMLoginActivity view) {
+    public LoginPresenter(LoginContact.View view) {
         this.loginView = view;
         this.loginModel = new LoginModel(loginView.MYgetCOntext()); // 可以通过依赖注入解耦
     }
@@ -47,20 +47,14 @@ public class LoginPresenter implements IMLoginPresenter
     public void getKeepPassword(String username, String password) {
         loginModel.updateKeepPassword(username,password);
     }
-
-    @Override
-    public void concelKeepPassword() {
-        loginModel.concelKeepPassword();
-    }
-
     @Override
     public String returnSelect() {
         return loginModel.getSelect();
     }
 
     @Override
-    public void containKeepPassword() {
-        loginModel.containkeepPassword();
+    public void containKeepPassword(String select) {
+        loginModel.containkeepPassword(select);
     }
 
     public class MyHandler extends Handler {

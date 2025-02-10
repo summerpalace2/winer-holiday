@@ -6,15 +6,15 @@ import androidx.annotation.NonNull;
 import com.example.once2.model.Json.RegisterJson;
 import com.example.once2.model.RegisterModel;
 import com.example.once2.View.RegisterActivity;
-import com.example.once2.View.IMRegisterActivity;
+
 /**
  * description ： TODO:类的作用
  * author : summer_palace2
  * email : 2992203079qq.com
  * date : 2025/1/20 19:19
  */
-public class RegisterPresenter implements IMRegisterPresenter {
-    private IMRegisterActivity registerView;
+public class RegisterPresenter implements RegisterContact.Presenter {
+    private RegisterContact.View registerView;
     private RegisterModel registerModel;
     private String username;
     private String password;

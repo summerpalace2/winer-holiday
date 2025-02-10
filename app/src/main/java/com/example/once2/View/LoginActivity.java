@@ -15,12 +15,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.once2.Presenter.LoginContact;
 import com.example.once2.R;
 import com.example.once2.Presenter.LoginPresenter;
 import com.example.once2.View.ui.HomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity implements IMLoginActivity {
+public class LoginActivity extends AppCompatActivity implements LoginContact.View {
     private EditText mEditText1;
     private EditText mEditText2;
     private TextInputLayout mTextInputLayout1;
@@ -61,10 +63,10 @@ public class LoginActivity extends AppCompatActivity implements IMLoginActivity 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    loginPresenter.containKeepPassword();
+                    loginPresenter.containKeepPassword("true");
                 }
                 if (!isChecked) {
-                    loginPresenter.concelKeepPassword();
+                    loginPresenter.containKeepPassword("false");
                 }
             }
         });
